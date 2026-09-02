@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Expense Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Literata:opsz,wght@18..72,400;18..72,500;18..72,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+<div class="cover">
+  <h1 class="cover__title">EXPENSE TRACKER</h1>
+  <p class="cover__tagline">Track your money expenses. A smarter way to manage your everyday finances.</p>
+</div>
+<main class="page">
+  <section class="glance" aria-label="Balance at a glance">
+    <div class="tape-card tape-card--honey">
+      <span class="tape-card__label">Balance</span>
+      <span class="tape-card__value" id="balanceAmount">₹0</span>
+    </div>
+    <div class="tape-card tape-card--moss">
+      <span class="tape-card__label">Income</span>
+      <span class="tape-card__value" id="incomeAmount">₹0</span>
+    </div>
+    <div class="tape-card tape-card--plum">
+      <span class="tape-card__label">Expenses</span>
+      <span class="tape-card__value" id="expenseAmount">₹0</span>
+    </div>
+  </section>
+
+  <div class="spread">
+    <section class="index-card" aria-label="Add or edit an entry">
+      <h2 class="index-card__title" id="formTitle">New entry</h2>
+      <form id="entryForm" novalidate>
+        <input type="hidden" id="editingId" value="" />
+
+        <div class="chip-row" role="radiogroup" aria-label="Entry type">
+          <button type="button" class="chip" data-type="expense" aria-pressed="true">Expense</button>
+          <button type="button" class="chip" data-type="income" aria-pressed="false">Income</button>
+        </div>
+        <input type="hidden" id="entryType" value="expense" />
+
+        <label class="field" for="amount">
+          <span>Amount</span>
+          <input type="number" id="amount" min="0" step="0.01" placeholder="0.00" />
+          <em class="field__error" id="amountError"></em>
+        </label>
+
+        <label class="field" for="category">
+          <span>Category</span>
+          <select id="category">
+            <option value="">Pick one</option>
+          </select>
+          <em class="field__error" id="categoryError"></em>
+        </label>
+
+        <label class="field" for="date">
+          <span>Date</span>
+          <input type="date" id="date" />
+          <em class="field__error" id="dateError"></em>
+        </label>
+
+        <label class="field" for="description">
+          <span>Description</span>
+          <input type="text" id="description" maxlength="100" placeholder="Dinner with friends" />
+          <em class="field__error" id="descriptionError"></em>
+        </label>
+
+        <div class="entry-actions">
+          <button type="submit" class="btn-pen" id="submitBtn">Add entry</button>
+          <button type="button" class="btn-pen btn-pen--ghost" id="cancelEditBtn" hidden>Never mind</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="page-ruled" aria-label="Entries">
+      <div class="page-ruled__head">
+        <h2 class="index-card__title">Every entry</h2>
+        <div class="filter-bar">
+          <div class="chip-row chip-row--filter" role="radiogroup" aria-label="Filter by type">
+            <button type="button" class="chip chip--filter is-active" data-filter-type="all">All</button>
+            <button type="button" class="chip chip--filter" data-filter-type="income">Income</button>
+            <button type="button" class="chip chip--filter" data-filter-type="expense">Expense</button>
+          </div>
+          <select id="filterCategory" class="select-quiet">
+            <option value="all">Any category</option>
+          </select>
+          <button type="button" class="link-btn" id="resetFiltersBtn">Clear filters</button>
+        </div>
+      </div>
+
+      <p class="scrawl" id="emptyState" hidden></p>
+
+      <ul class="entries" id="entriesList"></ul>
+    </section>
+  </div>
+
+  <div class="spread spread--lower">
+    <section class="index-card" aria-label="This month">
+      <div class="page-ruled__head">
+        <h2 class="index-card__title">Monthly Expense</h2>
+        <input type="month" id="monthPicker" class="select-quiet" />
+      </div>
+      <div class="month-stats">
+        <div><span>Income</span><strong id="monthlyIncome">₹0</strong></div>
+        <div><span>Expense</span><strong id="monthlyExpense">₹0</strong></div>
+        <div><span>Left over</span><strong id="monthlyBalance">₹0</strong></div>
+        <div><span>Entries</span><strong id="monthlyCount">0</strong></div>
+      </div>
+    </section>
+
+    <section class="index-card" aria-label="Where it goes">
+      <h2 class="index-card__title">Expense Chart</h2>
+      <div class="chart-wrap">
+        <canvas id="categoryChart"></canvas>
+        <!-- <p class="scrawl" id="chartEmptyState" hidden>Nothing to show yet — log an expense first.</p> -->
+      </div>
+    </section>
+  </div>
+</main>
+
+<center><footer> &copy; 2026 Jisha Shaji · Expense Tracker</footer></center>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script type="module" src="./js/app.js"></script>
+</body>
+</html>
