@@ -49,7 +49,7 @@ expense-tracker/
 ## STEPS TO RUN APPLICATION
 
 Using VS Code:
-i. git clone https://github.com/jishashaji1413-hub/expense-tracker-jisha-shaji.git
-ii. Open index.html
-iii. Right-click inside the file
+i. git clone https://github.com/jishashaji1413-hub/expense-tracker-jisha-shaji.git .
+ii. Open index.html .
+iii. Right-click inside the file .
 iv. Select Open with Live Server
